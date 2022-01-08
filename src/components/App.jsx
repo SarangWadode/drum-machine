@@ -59,19 +59,33 @@ const keys = [
   }
 ]
 
-
 export default class App extends Component {
+  componentDidMount() {
+    window.addEventListener('keydown',(e) => {
+      const button = document.querySelector(`[data-key="${e.keyCode}"]`)
+      console.log(button);
+      if (button === null) {
+        console.log('wrong drumpad key pressed')
+        return
+      }
+      const audio = button.querySelector('audio')
+      console.log(audio)
+      audio.play()
+    })
+  }
+
   render() {
     return (
       <div className="App" id="drum-machine" >
         <div id="display">
           <p>this is a display element</p>
         </div>
-        {
-          keys.map((key,id) => <Drumpad className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} />)
-        }
+        <div id="buttons">
+          {
+            keys.map((key,id) => <Drumpad className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} />)
+          }
+        </div>
       </div>
     )
   }
 }
-
