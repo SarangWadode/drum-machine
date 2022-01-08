@@ -28,4 +28,10 @@
     background: rgb(237, 100, 225);
     border-radius: 10px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: yellow;
 }

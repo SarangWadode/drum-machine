@@ -77,15 +77,16 @@ export default class App extends Component {
     }
     this.handleKeypress = this.handleKeypress.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.removeTransition = this.removeTransition.bind(this)
   }
 
   componentWillUnmount() {
-    console.log("will unmount")
-    // window.removeEventListener('keydown')
+    window.removeEventListener('keydown',this.handleKeypress)
   }
 
   componentDidMount() {
     window.addEventListener('keydown',this.handleKeypress)
+    window.addEventListener('transitionend',this.removeTransition)
   }
   
   handleKeypress(e) {
@@ -98,21 +99,32 @@ export default class App extends Component {
     // console.log(audio)
     audio.currentTime = 0;
     audio.play()
-    // console.log(button.name)
+    button.classList.add('playing')
     this.setState({
       display: button.name
     })
-    // console.log(this.state.display)
   }
   
   handleClick(e) {
     const button = e.target;
     const audio = button.querySelector('audio')
-    // console.log(audio)
+    button.classList.add('playing')
+    // console.log(button)
     audio.play()
     // console.log(button.name)
     this.setState({
       display: button.name
+    })
+    button.addEventListener('transitionend',this.removeTransition)
+  }
+
+  removeTransition(e) {
+    if (e.propertyName !== 'transform') {
+      return
+    }
+    const buttons = document.querySelectorAll('.drum-pad')
+    buttons.forEach(button => {
+      button.classList.remove('playing')
     })
   }
 
