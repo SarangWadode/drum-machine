@@ -1,69 +1,77 @@
+import React, { Component } from 'react'
 import './App.css';
 import Drumpad from './Drumpad';
 
 const keys = [
   {
     'class': 'drum-pad',
-    'data-key': '81',
-    'text': 'Q'
+    'dataKey': '81',
+    'text': 'Q',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '87',
-    'text': 'W'
+    'dataKey': '87',
+    'text': 'W',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '69',
-    'text': 'E'
+    'dataKey': '69',
+    'text': 'E',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '65',
-    'text': 'E'
+    'dataKey': '65',
+    'text': 'A',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '83',
-    'text': 'S'
+    'dataKey': '83',
+    'text': 'S',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '68',
-    'text': 'D'
+    'dataKey': '68',
+    'text': 'D',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '90',
-    'text': 'Z'
+    'dataKey': '90',
+    'text': 'Z',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '88',
-    'text': 'X'
+    'dataKey': '88',
+    'text': 'X',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'
   },
   {
     'class': 'drum-pad',
-    'data-key': '67',
-    'text': 'C'
+    'dataKey': '67',
+    'text': 'C',
+    'sound': 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
 ]
 
-function App() {
-  window.addEventListener('keydown',(e) => 
-  console.log(e.keyCode)
-  )
 
-  return (
-    <div className="App" id="drum-machine" >
-      <div id="display">
-        <p>this is a display element</p>
+export default class App extends Component {
+  render() {
+    return (
+      <div className="App" id="drum-machine" >
+        <div id="display">
+          <p>this is a display element</p>
+        </div>
+        {
+          keys.map((key,id) => <Drumpad className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} />)
+        }
       </div>
-      {
-        keys.map((key,id) => <Drumpad class={key.class} date-key={key.data-key} text={key.text} key={id} />)
-      }
-    </div>
-  );
+    )
+  }
 }
 
-export default App;
