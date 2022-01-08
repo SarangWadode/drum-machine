@@ -74,6 +74,13 @@ export default class App extends Component {
     })
   }
 
+  handleClick(e) {
+    const button = e.target;
+    const audio = button.querySelector('audio')
+    console.log(audio)
+    audio.play()
+  }
+
   render() {
     return (
       <div className="App" id="drum-machine" >
@@ -82,7 +89,7 @@ export default class App extends Component {
         </div>
         <div id="buttons">
           {
-            keys.map((key,id) => <Drumpad className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} />)
+            keys.map((key,id) => <Drumpad onClick={this.handleClick} className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} />)
           }
         </div>
       </div>
