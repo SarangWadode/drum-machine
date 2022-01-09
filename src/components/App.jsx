@@ -74,7 +74,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       display: '',
-      vol: '0'
+      vol: '0.5'
     }
     this.handleKeypress = this.handleKeypress.bind(this)
     this.removeTransition = this.removeTransition.bind(this)
@@ -102,7 +102,6 @@ export default class App extends Component {
       return
     }
     const audio = button.querySelector('audio')
-    // console.log(audio)
     audio.currentTime = 0;
     audio.play()
     button.classList.add('playing')
@@ -124,11 +123,9 @@ export default class App extends Component {
 
   handleChange(e) {
     const audios = document.querySelectorAll('audio')
-    console.log(audios)
     this.setState({
       vol: e.target.value
     })
-    console.log(this.state.vol)
     audios.forEach(audio => {
       audio.volume = e.target.value
     })

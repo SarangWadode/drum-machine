@@ -1,19 +1,23 @@
 .App {
     display: flex;
     flex-direction: column;
-    background: rgb(76, 138, 209);
+    background: rgb(129, 121, 121);
     width: 300px;
     height: 300px;
+    border: 1px solid rgb(43, 38, 38);
     border-radius: 20px;
+    box-shadow: 15px 15px 23px 0px rgba(92,92,92, 0.75);
 }
 
 #display {
-    height: 50px;
-    background: chartreuse;
+    height: 55px;
+    background: rgb(43, 40, 40);
     border-radius: 20px 20px 0 0;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    font-size: 18px;
+    color: rgb(241, 234, 234);
 }
 
 #buttons {
@@ -25,18 +29,26 @@
 }
 
 .drum-pad {
-    background: rgb(237, 100, 225);
+    background: rgb(211, 195, 210);
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    font-size: 18px;
 }
 
 .playing {
     transform: scale(1.1);
-    border-color: yellow;
+    border-color: rgb(8, 8, 8);
+    background: rgb(70, 68, 68);
+    color: white;
 }
 
 .slider {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 45px;
+    border-radius: 0 0 20px 20px;
+    background: rgb(43, 40, 40);;
+    color: white;
 }

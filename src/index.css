@@ -19,6 +19,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgb(219, 212, 212);
+  font-family: monospace;
+  font-weight: 600;
 }
 
 code {
