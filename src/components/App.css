@@ -35,3 +35,8 @@
     transform: scale(1.1);
     border-color: yellow;
 }
+
+.slider {
+    display: flex;
+    justify-content: center;
+}

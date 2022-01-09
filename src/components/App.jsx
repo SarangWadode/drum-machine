@@ -73,11 +73,12 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      display: ''
+      display: '',
+      vol: '0'
     }
     this.handleKeypress = this.handleKeypress.bind(this)
-    this.handleClick = this.handleClick.bind(this)
     this.removeTransition = this.removeTransition.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentWillUnmount() {
@@ -90,7 +91,12 @@ export default class App extends Component {
   }
   
   handleKeypress(e) {
-    const button = document.querySelector(`[data-key="${e.keyCode}"]`)
+    let button;
+    if (e.type === 'keydown') {
+      button = document.querySelector(`[data-key="${e.keyCode}"]`)
+    } else {
+      button = e.target;
+    }
     if (button === null) {
       console.log('wrong drumpad key pressed')
       return
@@ -101,21 +107,8 @@ export default class App extends Component {
     audio.play()
     button.classList.add('playing')
     this.setState({
-      display: button.name
+      display: button.name,
     })
-  }
-  
-  handleClick(e) {
-    const button = e.target;
-    const audio = button.querySelector('audio')
-    button.classList.add('playing')
-    // console.log(button)
-    audio.play()
-    // console.log(button.name)
-    this.setState({
-      display: button.name
-    })
-    button.addEventListener('transitionend',this.removeTransition)
   }
 
   removeTransition(e) {
@@ -125,6 +118,19 @@ export default class App extends Component {
     const buttons = document.querySelectorAll('.drum-pad')
     buttons.forEach(button => {
       button.classList.remove('playing')
+      button.dispatchEvent(new Event('blur'))
+    })
+  }
+
+  handleChange(e) {
+    const audios = document.querySelectorAll('audio')
+    console.log(audios)
+    this.setState({
+      vol: e.target.value
+    })
+    console.log(this.state.vol)
+    audios.forEach(audio => {
+      audio.volume = e.target.value
     })
   }
 
@@ -136,8 +142,13 @@ export default class App extends Component {
         </div>
         <div id="buttons">
           {
-            keys.map((key,id) => <Drumpad onClick={this.handleClick} className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} name={key.name} />)
+            keys.map((key,id) => <Drumpad onClick={this.handleKeypress} className={key.class} dataKey={key.dataKey} text={key.text} sound={key.sound} key={id} name={key.name} />)
           }
+        </div>
+        <div className="slider">
+          <label htmlFor="volume">Volume
+            <input type="range" name='volume' className="volume" onChange={this.handleChange} value={this.state.vol} step="0.05" min='0' max='1' />
+          </label>
         </div>
       </div>
     )
